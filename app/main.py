@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from .core.cors import setup_cors
 from .core.logging import setup_logging
 from .db.session import create_db_and_tables
+from .routers import speakers
 
 setup_logging()
 
@@ -18,3 +19,5 @@ async def lifespan(app: FastAPI):
 app = FastAPI()
 
 setup_cors(app)
+
+app.include_router(speakers.router)
