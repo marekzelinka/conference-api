@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from .core.cors import setup_cors
 from .core.logging import setup_logging
 from .db.session import create_db_and_tables
-from .routers import speakers
+from .routers import speakers, talks
 
 setup_logging()
 
@@ -21,3 +21,4 @@ app = FastAPI()
 setup_cors(app)
 
 app.include_router(speakers.router)
+app.include_router(talks.router)
