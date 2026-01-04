@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class TalkBase(BaseModel):
@@ -15,11 +15,10 @@ class TalkCreate(TalkBase):
 
 
 class Talk(TalkBase):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     speaker_id: int
-
-    class Config:
-        orm_mode = True
 
 
 class SpeakerBase(BaseModel):
@@ -33,11 +32,10 @@ class SpeakerCreate(SpeakerBase):
 
 
 class Speaker(SpeakerBase):
+    model_config = ConfigDict(from_attributes=True)
+
     id: int
     talks: list[Talk] = []
-
-    class Config:
-        orm_mode = True
 
 
 class SpeakerWithTalks(Speaker):
